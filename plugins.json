@@ -3,7 +3,7 @@
     "id": "asura-scans",
     "name": "Asura Scans",
     "manifestURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/manifest.json",
-    "language": "javascript",
+    "language": "typescript",
     "type": "manga-provider",
     "description": "High-quality manga & manhwa provider for Asura Scans (asurascans.com) with ad filtering and sequential chapter indexing.",
     "author": "Community",
