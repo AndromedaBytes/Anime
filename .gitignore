@@ -1,10 +1,6 @@
 # Dependencies
 node_modules/
 
-# Build artifacts
-dist/
-*.tsbuildinfo
-
 # Test and coverage
 coverage/
 .vitest/
