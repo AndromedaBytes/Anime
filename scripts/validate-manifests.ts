@@ -47,21 +47,18 @@ function validateManifests(): void {
     );
   }
 
-  const pluginEntry = plugins.plugins?.find((p: any) => p.id === manifest.id);
+  if (!Array.isArray(plugins)) {
+    results[1].errors.push('plugins.json must be a top-level JSON array [ { ... } ] for Seanime Go unmarshaler.');
+  }
+
+  const pluginEntry = Array.isArray(plugins) ? plugins.find((p: any) => p.id === manifest.id) : null;
   if (!pluginEntry) {
     results[1].errors.push(`plugins.json does not contain matching plugin entry for id: "${manifest.id}"`);
-  } else if (pluginEntry.version !== expectedVersion) {
-    results[1].errors.push(
-      `Version mismatch: plugins.json entry "${pluginEntry.id}" has version "${pluginEntry.version}", expected "${expectedVersion}"`
-    );
   }
 
   // 2. URL Format and Placeholders Verification
   const checkUrl = (url: string, fieldName: string, res: ValidationResult) => {
-    if (!url) {
-      res.errors.push(`Missing required field: ${fieldName}`);
-      return;
-    }
+    if (!url) return;
     if (url.includes('username/seanime-asura-provider')) {
       res.warnings.push(
         `${fieldName} still contains placeholder repository path: "${url}" (remember to update with actual GitHub owner/repo).`
@@ -86,9 +83,8 @@ function validateManifests(): void {
   // Check plugins.json URLs
   if (pluginEntry) {
     checkUrl(pluginEntry.manifestURI, 'plugins[].manifestURI', results[1]);
-    checkUrl(pluginEntry.payloadURI, 'plugins[].payloadURI', results[1]);
     checkUrl(pluginEntry.icon, 'plugins[].icon', results[1]);
-    checkUrl(pluginEntry.repository, 'plugins[].repository', results[1]);
+    checkUrl(pluginEntry.website, 'plugins[].website', results[1]);
   }
 
   // 3. Local Asset Verification

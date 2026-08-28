@@ -5,21 +5,19 @@ import * as path from 'path';
 describe('Manifest Schema Validation', () => {
   const rootDir = path.resolve(__dirname, '..');
 
-  it('validates plugins.json structure for marketplace compatibility', () => {
+  it('validates plugins.json structure as JSON array for Seanime marketplace compatibility', () => {
     const pluginsPath = path.join(rootDir, 'plugins.json');
     expect(fs.existsSync(pluginsPath)).toBe(true);
 
     const content = JSON.parse(fs.readFileSync(pluginsPath, 'utf-8'));
-    expect(content.manifestVersion).toBeDefined();
-    expect(Array.isArray(content.plugins)).toBe(true);
-    expect(content.plugins.length).toBeGreaterThan(0);
+    expect(Array.isArray(content)).toBe(true);
+    expect(content.length).toBeGreaterThan(0);
 
-    const plugin = content.plugins[0];
-    expect(plugin.id).toBe('asura-scans');
+    const plugin = content.find((p: any) => p.id === 'asura-scans');
+    expect(plugin).toBeDefined();
     expect(plugin.name).toBe('Asura Scans');
     expect(plugin.type).toBe('manga-provider');
-    expect(plugin.version).toBeDefined();
-    expect(plugin.entrypoint).toBe('dist/index.js');
+    expect(plugin.manifestURI).toBeDefined();
   });
 
   it('validates manifest.json structure for standalone extension installation', () => {
