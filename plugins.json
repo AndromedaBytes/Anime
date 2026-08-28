@@ -8,7 +8,67 @@
     "description": "High-quality manga & manhwa provider for Asura Scans (asurascans.com) with ad filtering and sequential chapter indexing.",
     "author": "Community",
     "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
-    "website": "https://github.com/AndromedaBytes/Anime",
+    "website": "https://asurascans.com",
+    "lang": "en"
+  },
+  {
+    "id": "comick",
+    "name": "Comick",
+    "manifestURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/src/providers/manga/comick/manifest.json",
+    "language": "typescript",
+    "type": "manga-provider",
+    "description": "High-quality manga & manhwa provider for Comick (comick.io) with multi-scanlator and multi-language support.",
+    "author": "Community",
+    "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
+    "website": "https://comick.io",
+    "lang": "en"
+  },
+  {
+    "id": "flame-comics",
+    "name": "Flame Comics",
+    "manifestURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/src/providers/manga/flame-comics/manifest.json",
+    "language": "typescript",
+    "type": "manga-provider",
+    "description": "High-quality manga & manhwa provider for Flame Comics (flamecomics.xyz).",
+    "author": "Community",
+    "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
+    "website": "https://flamecomics.xyz",
+    "lang": "en"
+  },
+  {
+    "id": "mangafire",
+    "name": "MangaFire",
+    "manifestURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/src/providers/manga/mangafire/manifest.json",
+    "language": "typescript",
+    "type": "manga-provider",
+    "description": "Fast manga reading source for MangaFire (mangafire.to) with extensive volume and chapter archives.",
+    "author": "Community",
+    "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
+    "website": "https://mangafire.to",
+    "lang": "en"
+  },
+  {
+    "id": "nyaa",
+    "name": "Nyaa",
+    "manifestURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/src/providers/anime-torrent/nyaa/manifest.json",
+    "language": "typescript",
+    "type": "anime-torrent-provider",
+    "description": "Primary anime torrent tracker and RSS feed indexer for Seanime torrent streaming (nyaa.si).",
+    "author": "Community",
+    "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
+    "website": "https://nyaa.si",
+    "lang": "multi"
+  },
+  {
+    "id": "gogoanime",
+    "name": "Gogoanime",
+    "manifestURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/src/providers/onlinestream/gogoanime/manifest.json",
+    "language": "typescript",
+    "type": "onlinestream-provider",
+    "description": "Online anime streaming provider with subbed and dubbed video sources (anitaku.to / gogoanime3.co).",
+    "author": "Community",
+    "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
+    "website": "https://anitaku.to",
     "lang": "en"
   }
 ]

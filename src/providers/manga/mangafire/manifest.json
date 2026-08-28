@@ -1,0 +1,14 @@
+{
+  "id": "mangafire",
+  "name": "MangaFire",
+  "version": "1.0.0",
+  "manifestURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/src/providers/manga/mangafire/manifest.json",
+  "language": "typescript",
+  "type": "manga-provider",
+  "description": "Fast manga reading source for MangaFire (mangafire.to) with extensive volume and chapter archives.",
+  "author": "Community",
+  "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
+  "website": "https://mangafire.to",
+  "lang": "en",
+  "payloadURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/src/providers/manga/mangafire/provider.ts"
+}

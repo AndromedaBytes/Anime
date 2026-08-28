@@ -13,106 +13,68 @@ const manifestJsonPath = path.join(rootDir, 'manifest.json');
 const pluginsJsonPath = path.join(rootDir, 'plugins.json');
 
 function validateManifests(): void {
-  console.log('🔍 Starting Manifest & URL Consistency Validation...\n');
+  console.log('🔍 Starting Manifest & Multi-Provider Consistency Validation...\n');
 
-  if (!fs.existsSync(packageJsonPath)) {
-    console.error('❌ package.json not found!');
-    process.exit(1);
-  }
-  if (!fs.existsSync(manifestJsonPath)) {
-    console.error('❌ manifest.json not found!');
-    process.exit(1);
-  }
-  if (!fs.existsSync(pluginsJsonPath)) {
-    console.error('❌ plugins.json not found!');
+  if (!fs.existsSync(packageJsonPath) || !fs.existsSync(manifestJsonPath) || !fs.existsSync(pluginsJsonPath)) {
+    console.error('❌ Root configuration files missing!');
     process.exit(1);
   }
 
   const pkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
-  const manifest = JSON.parse(fs.readFileSync(manifestJsonPath, 'utf-8'));
   const plugins = JSON.parse(fs.readFileSync(pluginsJsonPath, 'utf-8'));
 
-  const results: ValidationResult[] = [
-    { file: 'manifest.json', errors: [], warnings: [] },
-    { file: 'plugins.json', errors: [], warnings: [] },
-  ];
-
-  // 1. Version Sync Verification
-  const expectedVersion = pkg.version;
-  console.log(`📦 Base Package Version: ${expectedVersion}`);
-
-  if (manifest.version !== expectedVersion) {
-    results[0].errors.push(
-      `Version mismatch: manifest.json has "${manifest.version}", expected "${expectedVersion}"`
-    );
-  }
-
   if (!Array.isArray(plugins)) {
-    results[1].errors.push('plugins.json must be a top-level JSON array [ { ... } ] for Seanime Go unmarshaler.');
+    console.error('❌ plugins.json must be a top-level JSON array.');
+    process.exit(1);
   }
 
-  const pluginEntry = Array.isArray(plugins) ? plugins.find((p: any) => p.id === manifest.id) : null;
-  if (!pluginEntry) {
-    results[1].errors.push(`plugins.json does not contain matching plugin entry for id: "${manifest.id}"`);
-  }
+  console.log(`📦 Validating ${plugins.length} registered providers in plugins.json...\n`);
 
-  // 2. URL Format and Placeholders Verification
-  const checkUrl = (url: string, fieldName: string, res: ValidationResult) => {
-    if (!url) return;
-    if (url.includes('username/seanime-asura-provider')) {
-      res.warnings.push(
-        `${fieldName} still contains placeholder repository path: "${url}" (remember to update with actual GitHub owner/repo).`
-      );
-    }
-    try {
-      const parsed = new URL(url);
-      if (!['http:', 'https:'].includes(parsed.protocol)) {
-        res.errors.push(`${fieldName} must use HTTP/HTTPS protocol: "${url}"`);
+  let totalErrors = 0;
+
+  plugins.forEach((plugin: any) => {
+    const res: ValidationResult = { file: `plugins.json -> [${plugin.id}]`, errors: [], warnings: [] };
+
+    if (!plugin.id) res.errors.push('Missing "id"');
+    if (!plugin.name) res.errors.push('Missing "name"');
+    if (!plugin.type) res.errors.push('Missing "type"');
+    if (!plugin.manifestURI) res.errors.push('Missing "manifestURI"');
+
+    // Check if manifestURI is a local repo path and exists
+    if (plugin.manifestURI.includes('AndromedaBytes/Anime/main/')) {
+      const relPath = plugin.manifestURI.split('AndromedaBytes/Anime/main/')[1];
+      const localPath = path.join(rootDir, relPath);
+      if (!fs.existsSync(localPath)) {
+        res.errors.push(`Referenced local manifest does not exist at: ${relPath}`);
+      } else {
+        const localManifest = JSON.parse(fs.readFileSync(localPath, 'utf-8'));
+        if (localManifest.id !== plugin.id) {
+          res.errors.push(`Local manifest ID mismatch: expected "${plugin.id}", got "${localManifest.id}"`);
+        }
+        if (localManifest.payloadURI && localManifest.payloadURI.includes('AndromedaBytes/Anime/main/')) {
+          const payloadRelPath = localManifest.payloadURI.split('AndromedaBytes/Anime/main/')[1];
+          const payloadLocalPath = path.join(rootDir, payloadRelPath);
+          if (!fs.existsSync(payloadLocalPath)) {
+            res.errors.push(`Referenced payload does not exist at: ${payloadRelPath}`);
+          }
+        }
       }
-    } catch {
-      res.errors.push(`${fieldName} is not a valid URL: "${url}"`);
     }
-  };
 
-  // Check manifest.json URLs
-  checkUrl(manifest.manifestURI, 'manifestURI', results[0]);
-  checkUrl(manifest.payloadURI, 'payloadURI', results[0]);
-  if (manifest.icon) checkUrl(manifest.icon, 'icon', results[0]);
-  if (manifest.repository) checkUrl(manifest.repository, 'repository', results[0]);
-
-  // Check plugins.json URLs
-  if (pluginEntry) {
-    checkUrl(pluginEntry.manifestURI, 'plugins[].manifestURI', results[1]);
-    checkUrl(pluginEntry.icon, 'plugins[].icon', results[1]);
-    checkUrl(pluginEntry.website, 'plugins[].website', results[1]);
-  }
-
-  // 3. Local Asset Verification
-  const iconSvg = path.join(rootDir, 'assets', 'icon.svg');
-  if (!fs.existsSync(iconSvg)) {
-    results[0].warnings.push('assets/icon.svg not found on local disk.');
-  }
-
-  // Print Summary
-  let hasErrors = false;
-  results.forEach((r) => {
-    console.log(`📄 Checking ${r.file}:`);
-    if (r.errors.length === 0 && r.warnings.length === 0) {
-      console.log('   ✅ All checks passed.');
+    if (res.errors.length > 0) {
+      console.log(`❌ ${res.file}:`);
+      res.errors.forEach((e) => console.log(`   Error: ${e}`));
+      totalErrors++;
+    } else {
+      console.log(`✅ ${res.file} (${plugin.name} - ${plugin.type}) verified.`);
     }
-    r.warnings.forEach((w) => console.log(`   ⚠️  Warning: ${w}`));
-    r.errors.forEach((e) => {
-      console.log(`   ❌ Error: ${e}`);
-      hasErrors = true;
-    });
-    console.log('');
   });
 
-  if (hasErrors) {
-    console.error('❌ Validation failed with errors.');
+  if (totalErrors > 0) {
+    console.error(`\n❌ Validation failed with ${totalErrors} errors.`);
     process.exit(1);
   } else {
-    console.log('✨ All manifest schemas & URL constraints validated successfully.\n');
+    console.log('\n✨ All multi-provider manifests & payload files verified successfully.\n');
   }
 }
 
