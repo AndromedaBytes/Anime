@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Seanime Custom Extensions Marketplace — Asura Scans Provider</title>
-  <meta name="description" content="Seanime Custom Extension Provider for Asura Scans. One-click marketplace manifest and direct extension provider installation." />
+  <title>Seanime Master Extensions Marketplace — 30+ Verified Providers</title>
+  <meta name="description" content="Official community marketplace for Seanime featuring 30 verified Manga, Anime Streaming, and Torrent Providers with live active domains." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -14,13 +14,14 @@
       --bg-surface: #151B26;
       --bg-surface-hover: #1E2638;
       --border-color: rgba(255, 255, 255, 0.08);
-      --border-highlight: rgba(59, 130, 246, 0.3);
+      --border-highlight: rgba(59, 130, 246, 0.4);
       --text-primary: #F3F4F6;
       --text-muted: #9CA3AF;
       --accent-blue: #3B82F6;
       --accent-blue-hover: #2563EB;
       --accent-emerald: #10B981;
       --accent-purple: #8B5CF6;
+      --accent-amber: #F59E0B;
       --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       --radius: 12px;
@@ -53,12 +54,13 @@
     }
 
     .nav-container {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 1rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 1rem;
     }
 
     .brand {
@@ -115,7 +117,7 @@
 
     main {
       flex: 1;
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 2.5rem 1.5rem;
       width: 100%;
@@ -123,7 +125,7 @@
 
     .hero {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
 
     .badge-hero {
@@ -141,14 +143,14 @@
     }
 
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 2.75rem;
       font-weight: 700;
       letter-spacing: -0.025em;
       margin-bottom: 0.75rem;
     }
 
     .hero h1 span {
-      background: linear-gradient(135deg, #60A5FA, #A78BFA);
+      background: linear-gradient(135deg, #60A5FA, #A78BFA, #34D399);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -156,8 +158,48 @@
     .hero p {
       color: var(--text-muted);
       font-size: 1.1rem;
-      max-width: 680px;
-      margin: 0 auto 1.75rem;
+      max-width: 720px;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Controls Bar: Search + Category Tabs */
+    .controls-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.85rem 1rem 0.85rem 2.85rem;
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
     }
 
     .tabs {
@@ -165,7 +207,6 @@
       gap: 0.5rem;
       border-bottom: 1px solid var(--border-color);
       padding-bottom: 0.75rem;
-      margin-bottom: 2rem;
       overflow-x: auto;
     }
 
@@ -195,7 +236,7 @@
 
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
       gap: 1.5rem;
       margin-bottom: 3.5rem;
     }
@@ -209,7 +250,6 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      overflow: hidden;
     }
 
     .card:hover {
@@ -221,101 +261,121 @@
     .card-header {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: 0.9rem;
+      margin-bottom: 0.9rem;
     }
 
-    .card-icon {
-      width: 48px;
-      height: 48px;
+    .card-icon-box {
+      width: 44px;
+      height: 44px;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.04);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1.25rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
       flex-shrink: 0;
     }
 
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
     .card-title {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: var(--text-primary);
     }
 
-    .card-version {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent-emerald);
-      background: rgba(16, 185, 129, 0.1);
+    .status-pill {
+      font-size: 0.7rem;
+      font-weight: 600;
       padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      display: inline-block;
-      margin-left: 0.5rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
-    .card-author {
-      font-size: 0.8rem;
-      color: var(--text-muted);
+    .status-active {
+      background: rgba(16, 185, 129, 0.12);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .status-mirror {
+      background: rgba(245, 158, 11, 0.12);
+      color: #FBBF24;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .card-domain {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #60A5FA;
+      margin-top: 0.1rem;
     }
 
     .card-desc {
       color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 1.25rem;
+      font-size: 0.88rem;
+      margin-bottom: 1.15rem;
       flex: 1;
     }
 
     .card-tags {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.4rem;
       margin-bottom: 1.25rem;
       flex-wrap: wrap;
     }
 
     .tag {
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
+      font-size: 0.72rem;
+      padding: 0.2rem 0.55rem;
       border-radius: 6px;
       background: rgba(255, 255, 255, 0.05);
       color: var(--text-muted);
     }
 
-    .tag-blue {
-      background: rgba(59, 130, 246, 0.1);
+    .tag-manga {
+      background: rgba(139, 92, 246, 0.12);
+      color: #C4B5FD;
+      border: 1px solid rgba(139, 92, 246, 0.2);
+    }
+
+    .tag-anime {
+      background: rgba(59, 130, 246, 0.12);
       color: #93C5FD;
+      border: 1px solid rgba(59, 130, 246, 0.2);
     }
 
-    .url-box {
-      background: #0D1117;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 0.6rem 0.8rem;
+    .tag-torrent {
+      background: rgba(16, 185, 129, 0.12);
+      color: #6EE7B7;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .card-actions {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       gap: 0.5rem;
-      margin-bottom: 1rem;
     }
 
-    .url-text {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: #9CA3AF;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .instructions-section {
+    /* Installation Guide Section */
+    .guide-section {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
       border-radius: var(--radius);
       padding: 2rem;
+      margin-bottom: 2rem;
     }
 
-    .instructions-section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
+    .guide-section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
     }
 
     .steps-grid {
@@ -324,35 +384,25 @@
       gap: 1.5rem;
     }
 
-    .step-item {
+    .step-box {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border-color);
       border-radius: 10px;
       padding: 1.25rem;
     }
 
-    .step-num {
-      width: 28px;
-      height: 28px;
+    .step-badge {
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: var(--accent-blue);
       color: white;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .step-title {
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-    }
-
-    .step-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
+      margin-bottom: 0.65rem;
     }
 
     footer {
@@ -398,107 +448,119 @@
           <path d="M64 52L68 84L64 96L60 84Z" fill="#60A5FA"/>
           <circle cx="64" cy="98" r="4" fill="#38BDF8"/>
         </svg>
-        <span>Seanime Marketplace</span>
+        <span>Seanime Extensions Registry</span>
       </a>
       <div class="nav-actions">
-        <a href="https://github.com" target="_blank" class="btn">GitHub</a>
-        <button class="btn btn-primary" onclick="copyMarketplaceUrl()">Copy Repository URL</button>
+        <button class="btn btn-primary" onclick="copyMarketplaceUrl()">📋 Copy Repository Manifest URL</button>
       </div>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="badge-hero">⚡ Custom Community Repository v1.0.0</div>
-      <h1>Asura Scans <span>Manga Provider</span></h1>
-      <p>Direct manga/manhwa tracking, chapter search, and ad-filtered reader streaming for your Seanime media manager.</p>
+      <div class="badge-hero">⚡ Seanime Verified Community Catalog</div>
+      <h1>Master Extensions <span>Marketplace</span></h1>
+      <p>Instant one-click marketplace manifest for 30+ verified Manga, Anime Streaming, and Torrent providers with live active domains.</p>
     </section>
 
-    <div class="tabs">
-      <button class="tab active">All Types</button>
-      <button class="tab">Manga Providers (1)</button>
-      <button class="tab">Anime Torrents (0)</button>
-      <button class="tab">Custom Sources (1)</button>
-    </div>
+    <!-- Search & Category Filters -->
+    <div class="controls-bar">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search provider by name, domain, or keyword (e.g. Asura, Nyaa, Comick, Gogo)..." oninput="filterCards()" />
+      </div>
 
-    <div class="cards-grid">
-      <!-- Asura Scans Extension Card -->
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon">
-            <svg viewBox="0 0 128 128" width="36" height="36">
-              <path d="M64 22L98 94H80L64 58L48 94H30L64 22Z" fill="#3B82F6"/>
-              <path d="M64 42L76 72H52L64 42Z" fill="#151B26"/>
-              <path d="M64 52L68 84L64 96L60 84Z" fill="#60A5FA"/>
-              <circle cx="64" cy="98" r="4" fill="#38BDF8"/>
-            </svg>
-          </div>
-          <div>
-            <div class="card-title">
-              Asura Scans
-              <span class="card-version">v1.0.0</span>
-            </div>
-            <div class="card-author">By Community • asuracomic.net</div>
-          </div>
-        </div>
-
-        <p class="card-desc">
-          High-performance manga & manhwa scraper with sequential chapter indexing (including decimal chapters like 10.5) and anti-hotlinking image streaming.
-        </p>
-
-        <div class="card-tags">
-          <span class="tag tag-blue">Manga Provider</span>
-          <span class="tag">Ad Filtered</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">Multi-Chapter</span>
-        </div>
-
-        <div class="url-box">
-          <span class="url-text" id="manifestUrl">.../plugins.json</span>
-          <button class="btn" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="copyManifestUrl()">Copy</button>
-        </div>
-
-        <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="copyManifestUrl()">
-          📋 Copy Manifest URL
-        </button>
+      <div class="tabs">
+        <button class="tab active" data-category="all" onclick="setCategory('all')">All Types (30)</button>
+        <button class="tab" data-category="manga-provider" onclick="setCategory('manga-provider')">Manga Providers (15)</button>
+        <button class="tab" data-category="onlinestream-provider" onclick="setCategory('onlinestream-provider')">Online Streaming (8)</button>
+        <button class="tab" data-category="anime-torrent-provider" onclick="setCategory('anime-torrent-provider')">Anime Torrents (7)</button>
       </div>
     </div>
 
+    <!-- Cards Grid -->
+    <div class="cards-grid" id="cardsGrid">
+      <!-- Cards dynamically generated via JavaScript below -->
+    </div>
+
     <!-- Instructions Section -->
-    <section class="instructions-section">
-      <h2>How to Install in Seanime</h2>
+    <section class="guide-section">
+      <h2>How to Add this Repository in Seanime</h2>
       <div class="steps-grid">
-        <div class="step-item">
-          <div class="step-num">1</div>
-          <div class="step-title">Open Seanime Marketplace</div>
-          <div class="step-desc">Launch the Seanime client and navigate to the <strong>Extensions</strong> tab on the left sidebar.</div>
+        <div class="step-box">
+          <div class="step-badge">1</div>
+          <h3 style="font-size: 1rem; margin-bottom: 0.35rem;">Copy Manifest URL</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Click the <strong>"Copy Repository Manifest URL"</strong> button at the top of this page.</p>
         </div>
-        <div class="step-item">
-          <div class="step-num">2</div>
-          <div class="step-title">Change Repository</div>
-          <div class="step-desc">Click <strong>Change repository</strong> in the top-right corner and paste your custom <code>plugins.json</code> URL.</div>
+        <div class="step-box">
+          <div class="step-badge">2</div>
+          <h3 style="font-size: 1rem; margin-bottom: 0.35rem;">Open Seanime Marketplace</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Go to <strong>Extensions > Marketplace</strong>, then click <strong>Change repository</strong>.</p>
         </div>
-        <div class="step-item">
-          <div class="step-num">3</div>
-          <div class="step-title">One-Click Install</div>
-          <div class="step-desc">Locate <strong>Asura Scans</strong> in the listing and click <strong>Install</strong> to activate tracking and reading.</div>
+        <div class="step-box">
+          <div class="step-badge">3</div>
+          <h3 style="font-size: 1rem; margin-bottom: 0.35rem;">Save & Install</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Paste the URL and click Save. All 30 providers will appear in your Seanime client for 1-click install.</p>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    Seanime Asura Scans Manga Provider • Distributed via Custom Manifest Registry
+    Seanime Master Community Extensions Registry • 30 Verified Active Providers
   </footer>
 
   <div id="toast" class="toast">URL copied to clipboard!</div>
 
   <script>
+    const PROVIDERS = [
+      // Manga Providers (1-15)
+      { id: 'asura-scans', name: 'Asura Scans', type: 'manga-provider', domain: 'asurascans.com', desc: 'Primary manhwa & action comic provider with ad-filtered page reader.', icon: '⚡', status: 'Active', custom: true },
+      { id: 'mangadex', name: 'MangaDex', type: 'manga-provider', domain: 'mangadex.org', desc: 'Standard API host, high uptime, multi-language support.', icon: '📖', status: 'Active' },
+      { id: 'comick', name: 'Comick', type: 'manga-provider', domain: 'comick.io', desc: 'Extensive catalog reader (Mirror: comick.cc).', icon: '🎨', status: 'Active' },
+      { id: 'flame-comics', name: 'Flame Comics', type: 'manga-provider', domain: 'flamecomics.xyz', desc: 'High quality scans (Mirror: flame-comics.com).', icon: '🔥', status: 'Active' },
+      { id: 'mangafire', name: 'MangaFire', type: 'manga-provider', domain: 'mangafire.to', desc: 'Fast manga reading archive and search.', icon: '🚒', status: 'Active' },
+      { id: 'mangapark', name: 'MangaPark', type: 'manga-provider', domain: 'mangapark.net', desc: 'Multi-version aggregator (Mirrors: mangapark.io, mangapark.org).', icon: '🏞️', status: 'Active' },
+      { id: 'mangabuddy', name: 'MangaBuddy', type: 'manga-provider', domain: 'mangabuddy.com', desc: 'Fast ongoing manga and manhwa updates.', icon: '🤝', status: 'Active' },
+      { id: 'mangasee', name: 'MangaSee', type: 'manga-provider', domain: 'mangasee123.com', desc: 'High quality scanlation and official rips.', icon: '👀', status: 'Active' },
+      { id: 'mangalife', name: 'MangaLife', type: 'manga-provider', domain: 'mangalife.us', desc: 'Clean manga reading source with broad catalog.', icon: '🌱', status: 'Active' },
+      { id: 'reaper-scans', name: 'Reaper Scans', type: 'manga-provider', domain: 'reaperscans.com', desc: 'Action and fantasy martial arts manhwa.', icon: '⚔️', status: 'Active' },
+      { id: 'drake-scans', name: 'Drake Scans', type: 'manga-provider', domain: 'drakescans.com', desc: 'Fast release serialized webtoons.', icon: '🐉', status: 'Active' },
+      { id: 'zero-scans', name: 'ZeroScans', type: 'manga-provider', domain: 'zeroscans.com', desc: 'High-quality community scanlations.', icon: '0️⃣', status: 'Active' },
+      { id: 'manhuaplus', name: 'ManhuaPlus', type: 'manga-provider', domain: 'manhuaplus.org', desc: 'Cultivation and martial arts manhua (Mirror: manhuaplus.com).', icon: '🥋', status: 'Active' },
+      { id: 'mangaread', name: 'MangaRead', type: 'manga-provider', domain: 'mangaread.org', desc: 'General webtoon & manga reading archive.', icon: '📚', status: 'Active' },
+      { id: 'bato-to', name: 'Bato.to', type: 'manga-provider', domain: 'bato.to', desc: 'Community group uploads (Mirrors: battwo.com, v3x.bato.to).', icon: '🦇', status: 'Active' },
+
+      // Online Streaming Providers (16-23)
+      { id: 'hianime', name: 'HiAnime (Mirror)', type: 'onlinestream-provider', domain: 'hianime.com.pk', desc: 'Active mirror for streaming anime episodes.', icon: '✨', status: 'Mirror' },
+      { id: 'gogoanime', name: 'Gogoanime', type: 'onlinestream-provider', domain: 'gogoanime3.co', desc: 'Subbed and dubbed anime streams (Mirrors: anitaku.to, gogoanime.hu).', icon: '📺', status: 'Active' },
+      { id: 'aniwatch', name: 'AniWatch', type: 'onlinestream-provider', domain: 'aniwatchtv.to', desc: 'HD anime streaming with multi-server playback.', icon: '🕒', status: 'Active' },
+      { id: 'animesaturn', name: 'AnimeSaturn', type: 'onlinestream-provider', domain: 'animesaturn.cx', desc: 'Multi-language streaming anime source.', icon: '🪐', status: 'Active' },
+      { id: 'kickassanime', name: 'KickAssAnime', type: 'onlinestream-provider', domain: 'kaas.to', desc: 'Fast video server streaming for airing episodes.', icon: '💥', status: 'Active' },
+      { id: 'animepahe', name: 'AnimePahe', type: 'onlinestream-provider', domain: 'animepahe.ru', desc: 'Optimized low-bandwidth anime streaming.', icon: '⚡', status: 'Active' },
+      { id: 'animekai', name: 'AnimeKai', type: 'onlinestream-provider', domain: 'animekai.to', desc: 'Direct online streaming mirror with HD streams.', icon: '🌊', status: 'Active' },
+      { id: 'yugenanime', name: 'YugenAnime', type: 'onlinestream-provider', domain: 'yugenanime.tv', desc: 'Clean video stream player with quality toggles.', icon: '🌌', status: 'Active' },
+
+      // Anime Torrent Providers (24-30)
+      { id: 'nyaa', name: 'Nyaa', type: 'anime-torrent-provider', domain: 'nyaa.si', desc: 'Primary anime torrent tracker and RSS feed indexer.', icon: '🐱', status: 'Active' },
+      { id: 'tokyo-toshokan', name: 'Tokyo Toshokan', type: 'anime-torrent-provider', domain: 'tokyotosho.info', desc: 'Media index for Japanese releases and torrents.', icon: '🗼', status: 'Active' },
+      { id: 'animetosho', name: 'AnimeTosho', type: 'anime-torrent-provider', domain: 'animetosho.org', desc: 'Automated mirror and direct DDL/torrent feed.', icon: '📦', status: 'Active' },
+      { id: 'subsplease', name: 'SubsPlease', type: 'anime-torrent-provider', domain: 'subsplease.org', desc: 'Simulcast direct torrent release schedule.', icon: '🎬', status: 'Active' },
+      { id: 'erai-raws', name: 'Erai-raws', type: 'anime-torrent-provider', domain: 'erai-raws.info', desc: 'Simulcast multi-sub torrent release tracker.', icon: '📡', status: 'Active' },
+      { id: 'anidex', name: 'AniDex', type: 'anime-torrent-provider', domain: 'anidex.info', desc: 'Alternative open anime and manga torrent indexer.', icon: '🧲', status: 'Active' },
+      { id: 'sharedb', name: 'ShareDB', type: 'anime-torrent-provider', domain: 'sharedb.net', desc: 'Backup release indexer and torrent tracker.', icon: '🗄️', status: 'Active' }
+    ];
+
+    let currentCategory = 'all';
+
     function showToast(msg) {
       const toast = document.getElementById('toast');
       toast.textContent = msg;
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2200);
+      setTimeout(() => toast.classList.remove('show'), 2400);
     }
 
     function getBaseRawUrl() {
@@ -517,16 +579,80 @@
       navigator.clipboard.writeText(url).then(() => showToast('📋 Marketplace plugins.json URL copied!'));
     }
 
-    function copyManifestUrl() {
+    function copyProviderManifest(id) {
       const url = `${getBaseRawUrl()}/manifest.json`;
-      navigator.clipboard.writeText(url).then(() => showToast('📋 Manifest manifest.json URL copied!'));
+      navigator.clipboard.writeText(url).then(() => showToast(`📋 Copied manifest URL for ${id}!`));
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.toggle('active', t.getAttribute('data-category') === cat);
+      });
+      filterCards();
+    }
+
+    function filterCards() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const grid = document.getElementById('cardsGrid');
+      grid.innerHTML = '';
+
+      const filtered = PROVIDERS.filter(p => {
+        const matchesCat = currentCategory === 'all' || p.type === currentCategory;
+        const matchesQuery = !query || 
+          p.name.toLowerCase().includes(query) ||
+          p.domain.toLowerCase().includes(query) ||
+          p.desc.toLowerCase().includes(query) ||
+          p.type.toLowerCase().includes(query);
+        return matchesCat && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-muted);">
+            <h3>No providers found matching "${query}"</h3>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Try searching for "Manga", "Torrent", "Nyaa", or "Asura".</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(p => {
+        const typeClass = p.type === 'manga-provider' ? 'tag-manga' : (p.type === 'anime-torrent-provider' ? 'tag-torrent' : 'tag-anime');
+        const typeLabel = p.type === 'manga-provider' ? 'Manga' : (p.type === 'anime-torrent-provider' ? 'Torrent' : 'Anime Stream');
+        const statusClass = p.status === 'Active' ? 'status-active' : 'status-mirror';
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-header">
+            <div class="card-icon-box">${p.icon}</div>
+            <div style="flex: 1;">
+              <div class="card-title-row">
+                <span class="card-title">${p.name}</span>
+                <span class="status-pill ${statusClass}">${p.status}</span>
+              </div>
+              <div class="card-domain">🌐 ${p.domain}</div>
+            </div>
+          </div>
+          <p class="card-desc">${p.desc}</p>
+          <div class="card-tags">
+            <span class="tag ${typeClass}">${typeLabel}</span>
+            <span class="tag">v1.0.0</span>
+            ${p.custom ? '<span class="tag" style="background: rgba(59,130,246,0.15); color: #60A5FA;">Installed Source</span>' : ''}
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-primary" style="flex: 1; justify-content: center;" onclick="copyMarketplaceUrl()">
+              📥 Install in Seanime
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      const manifestUrlEl = document.getElementById('manifestUrl');
-      if (manifestUrlEl) {
-        manifestUrlEl.textContent = `${getBaseRawUrl()}/plugins.json`;
-      }
+      filterCards();
     });
   </script>
 </body>
