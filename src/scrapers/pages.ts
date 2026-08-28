@@ -14,7 +14,7 @@ export function parseReaderHtml(
 
   // Look for chapter reader image elements
   const imgElements = $(
-    'div.flex.flex-col.items-center img, div#readerarea img, div.rdcontainer img, img[alt*="chapter"], div.w-full img'
+    'img[src*="chapters"], img[alt*="Page"], img[alt*="Chapter"], div.flex.flex-col.items-center img, div#readerarea img, main img'
   );
 
   let pageIndex = 0;
@@ -40,7 +40,7 @@ export function parseReaderHtml(
     // Skip duplicate images
     if (seenUrls.has(fullUrl)) return;
 
-    // Filter out ads and promotional graphics
+    // Filter out ads, cover thumbnails, banners, and non-chapter graphics
     const isAd = SELECTORS.reader.adPatterns.some((pattern) => pattern.test(fullUrl));
     const altText = item.attr('alt') || '';
     const isAdAlt = SELECTORS.reader.adPatterns.some((pattern) => pattern.test(altText));
@@ -54,7 +54,7 @@ export function parseReaderHtml(
     pages.push({
       index: pageIndex++,
       url: fullUrl,
-      alt: `Page ${pageIndex}`,
+      alt: altText || `Page ${pageIndex}`,
       headers: {
         Referer: `${baseUrl}/`,
         'User-Agent':

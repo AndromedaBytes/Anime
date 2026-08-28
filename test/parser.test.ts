@@ -55,11 +55,11 @@ describe('Scrapers & Parsers', () => {
   });
 
   it('filters out ad/promo banners and extracts clean reader pages with headers', () => {
-    const pages = parseReaderHtml(mockReaderHtml);
+    const pages = parseReaderHtml(mockReaderHtml, 'https://asurascans.com');
     expect(pages).toHaveLength(3);
     expect(pages[0].url).toBe('https://asuracomic.net/storage/media/123/01.webp');
     expect(pages[0].index).toBe(0);
-    expect(pages[0].headers?.Referer).toBe('https://asuracomic.net/');
+    expect(pages[0].headers?.Referer).toBe('https://asurascans.com/');
     expect(pages[1].url).toBe('https://asuracomic.net/storage/media/123/02.webp');
     expect(pages[2].url).toBe('https://asuracomic.net/storage/media/123/03.webp');
   });

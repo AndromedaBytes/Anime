@@ -14,11 +14,13 @@ export function parseDetailsHtml(
 
   // Title
   const title =
-    cleanText($('div.text-center h3, h1, h2.font-bold').first().text()) ||
-    mangaId.replace(/-/g, ' ');
+    cleanText($('h1, h2.font-bold, div.text-center h3').first().text()) ||
+    mangaId.replace(/-[a-z0-9]+$/, '').replace(/-/g, ' ');
 
   // Cover image
-  const imgEl = $('img[alt*="poster"], img[alt*="cover"], img.rounded-md, div.thumb img').first();
+  const imgEl = $(
+    'img[src*="asura-images"], img[src*="cover"], img[src*="banners"], img[alt*="cover"], img.rounded-md, div.thumb img'
+  ).first();
   let image = imgEl.attr('src') || imgEl.attr('data-src') || '';
   if (image && image.includes(' ')) {
     image = image.split(' ')[0];
@@ -26,7 +28,7 @@ export function parseDetailsHtml(
   const fullImage = ensureAbsoluteUrl(image, baseUrl);
 
   // Synopsis
-  const synopsisEl = $('span.font-medium.text-sm, div.entry-content, div.synopsis, p.text-sm').first();
+  const synopsisEl = $('p.text-muted-foreground, p.text-sm, span.font-medium.text-sm, div.entry-content, div.synopsis').first();
   const synopsis = cleanText(synopsisEl.text());
 
   // Status
@@ -47,7 +49,7 @@ export function parseDetailsHtml(
 
   // Genres
   const genres: string[] = [];
-  $('div.flex.flex-wrap.gap-1 button, span.mgen a, a[href*="/genres/"], div.genres-content a').each(
+  $('div.flex.flex-wrap button, span.mgen a, a[href*="/genres/"], a[href*="/genre/"], div.genres-content a').each(
     (_, el) => {
       const g = cleanText($(el).text());
       if (g && !genres.includes(g)) {
@@ -60,7 +62,7 @@ export function parseDetailsHtml(
   const ratingEl = $('div.text-xl.font-bold, div.num, span[itemprop="ratingValue"]').first();
   const rating = cleanText(ratingEl.text()) || undefined;
 
-  // Type (Manhwa, Manga, Manhua)
+  // Type
   const typeText = $('div:contains("Type"), span:contains("Type")').text();
   const typeMatch = typeText.match(/Type\s*:\s*([A-Za-z]+)/i);
   const type = typeMatch ? typeMatch[1].trim() : undefined;

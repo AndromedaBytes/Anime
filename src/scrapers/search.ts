@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { SELECTORS, ASURA_BASE_URL } from '../config/selectors.js';
+import { SELECTORS, ASURA_BASE_URL, ASURA_FALLBACK_URL } from '../config/selectors.js';
 import { MangaSearchResult, SearchQueryOptions } from '../types.js';
 import { cleanText, ensureAbsoluteUrl, extractMangaId } from '../utils/sanitize.js';
 import { fetchWithRetry } from '../utils/http.js';
@@ -9,47 +9,53 @@ export async function parseSearchHtml(html: string, baseUrl: string = ASURA_BASE
   const results: MangaSearchResult[] = [];
   const seenIds = new Set<string>();
 
-  // Iterate over matching cards
-  $(SELECTORS.search.card).each((_, element) => {
+  // Look for cards or comic links
+  $('a[href*="/comics/"], a[href*="/series/"]').each((_, element) => {
     const el = $(element);
-    
-    // Find link
-    let link = el.is('a') ? el.attr('href') : el.find(SELECTORS.search.link).first().attr('href') || el.find('a').first().attr('href');
-    if (!link) return;
+    const href = el.attr('href');
+    if (!href || href.includes('/chapter/')) return;
 
-    const fullUrl = ensureAbsoluteUrl(link, baseUrl);
+    const fullUrl = ensureAbsoluteUrl(href, baseUrl);
     const id = extractMangaId(fullUrl);
 
     if (!id || seenIds.has(id)) return;
-    seenIds.add(id);
 
-    // Title
-    const titleEl = el.find(SELECTORS.search.title).first();
-    const title = cleanText(titleEl.text()) || cleanText(el.find('h2, h3, h4, span.font-bold').first().text()) || id;
+    // Title extraction
+    // In Astro card, title may be in child span, h3, or text without rating
+    let title = cleanText(el.find('h3, h4, span.font-bold, div.font-bold').first().text());
+    if (!title) {
+      const rawText = cleanText(el.text());
+      // Strip leading score (e.g. "9.8Solo Leveling" -> "Solo Leveling")
+      title = rawText.replace(/^[0-9]\.[0-9]\s*/, '').trim();
+    }
+    if (!title) {
+      title = id.replace(/-[a-z0-9]+$/, '').replace(/-/g, ' ');
+    }
 
-    // Image / Cover
-    const imgEl = el.find(SELECTORS.search.image).first();
-    let img = imgEl.attr('src') || imgEl.attr('data-src') || imgEl.attr('srcset') || '';
+    // Cover image
+    const imgEl = el.find('img').first();
+    let img = imgEl.attr('src') || imgEl.attr('data-src') || '';
     if (img && img.includes(' ')) {
       img = img.split(' ')[0];
     }
     const fullImage = ensureAbsoluteUrl(img, baseUrl);
 
-    // Rating (if present)
-    const ratingEl = el.find(SELECTORS.search.rating || 'div.rating').first();
-    const rating = cleanText(ratingEl.text()) || undefined;
+    // Rating
+    const ratingEl = el.find('span.text-xs, div.rating').first();
+    let rating = cleanText(ratingEl.text());
+    if (!rating) {
+      const scoreMatch = el.text().match(/([0-9]\.[0-9])/);
+      if (scoreMatch) rating = scoreMatch[1];
+    }
 
-    // Latest chapter
-    const latestChapterEl = el.find(SELECTORS.search.latestChapter || 'span.text-muted-foreground').first();
-    const latestChapter = cleanText(latestChapterEl.text()) || undefined;
+    seenIds.add(id);
 
     results.push({
       id,
       title,
       url: fullUrl,
       image: fullImage,
-      rating,
-      latestChapter,
+      rating: rating || undefined,
     });
   });
 
@@ -65,13 +71,24 @@ export async function searchManga(
     return [];
   }
 
-  const searchUrl = `${baseUrl}${SELECTORS.endpoints.search}${encodeURIComponent(query.trim())}`;
-  
-  try {
-    const html = await fetchWithRetry(searchUrl, { referer: baseUrl });
-    return await parseSearchHtml(html, baseUrl);
-  } catch (error: any) {
-    console.error(`[AsuraScansProvider] Search failed for "${query}":`, error?.message || error);
-    return [];
+  const encoded = encodeURIComponent(query.trim());
+  const searchUrls = [
+    `${baseUrl}${SELECTORS.endpoints.search}${encoded}`,
+    `${baseUrl}/browse/comics?search=${encoded}`,
+    `${ASURA_FALLBACK_URL}/browse?search=${encoded}`,
+  ];
+
+  for (const searchUrl of searchUrls) {
+    try {
+      const html = await fetchWithRetry(searchUrl, { referer: baseUrl });
+      const results = await parseSearchHtml(html, baseUrl);
+      if (results.length > 0) {
+        return results;
+      }
+    } catch (error: any) {
+      console.debug(`[AsuraScansProvider] Search attempt failed on "${searchUrl}":`, error?.message || error);
+    }
   }
+
+  return [];
 }

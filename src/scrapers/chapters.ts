@@ -12,29 +12,41 @@ export function parseChaptersHtml(
   const chapters: MangaChapter[] = [];
   const seenUrls = new Set<string>();
 
-  // Asura Scans chapter listing containers
-  // Modern asuracomic.net has chapters in list or flex container
-  const chapterNodes = $(
-    'div.flex.justify-between.items-center, div.eph-num, li[data-num], div.bxcl ul li, a[href*="/chapter/"]'
-  );
+  // Chapter links
+  const chapterNodes = $('a[href*="/chapter/"]');
 
   chapterNodes.each((_, el) => {
     const item = $(el);
-    let link = item.is('a') ? item.attr('href') : item.find('a[href*="/chapter/"]').first().attr('href') || item.find('a').first().attr('href');
-    
-    if (!link) return;
-    const fullUrl = ensureAbsoluteUrl(link, baseUrl);
+    const href = item.attr('href');
+    if (!href) return;
 
+    const fullUrl = ensureAbsoluteUrl(href, baseUrl);
     if (seenUrls.has(fullUrl)) return;
     seenUrls.add(fullUrl);
 
-    const titleEl = item.find('h3.text-sm.font-bold, span.chapternum, span.font-medium, a').first();
-    const rawTitle = cleanText(titleEl.text()) || cleanText(item.text());
-    
-    const chapterNumber = extractChapterNumber(rawTitle);
+    // Chapter title
+    let rawTitle = cleanText(item.find('h3, span.chapternum, span.font-medium').first().text());
+    if (!rawTitle) {
+      rawTitle = cleanText(item.text());
+    }
+
+    // Try extracting chapter number from title, fallback to URL
+    let chapterNumber = extractChapterNumber(rawTitle);
+    if (chapterNumber === 0) {
+      const urlNum = extractChapterNumber(href);
+      if (urlNum > 0) chapterNumber = urlNum;
+    }
+
+    // Clean up title if it's generic "First Chapter"
+    let displayTitle = rawTitle;
+    if (rawTitle.toLowerCase().includes('first chapter') || !rawTitle) {
+      displayTitle = `Chapter ${chapterNumber}`;
+    }
+
     const chapterStr = chapterNumber.toString();
 
-    const dateEl = item.find('h3.text-xs, span.chapterdate, span.text-xs').first();
+    // Date
+    const dateEl = item.find('h3.text-xs, span.chapterdate, span.text-xs, time').first();
     const updatedAt = cleanText(dateEl.text()) || undefined;
 
     const id = extractChapterId(fullUrl);
@@ -42,7 +54,7 @@ export function parseChaptersHtml(
     chapters.push({
       id,
       url: fullUrl,
-      title: rawTitle || `Chapter ${chapterStr}`,
+      title: displayTitle,
       chapter: chapterStr,
       chapterNumber,
       updatedAt,
@@ -50,15 +62,26 @@ export function parseChaptersHtml(
     });
   });
 
-  // Sort ascending by chapterNumber (e.g. Ch 1, Ch 1.5, Ch 2, etc.)
-  chapters.sort((a, b) => {
+  // Deduplicate entries that have the same chapterNumber and keep the one with a better title
+  const deduplicated = new Map<number, MangaChapter>();
+  for (const ch of chapters) {
+    const existing = deduplicated.get(ch.chapterNumber);
+    if (!existing || (!existing.title.toLowerCase().startsWith('chapter') && ch.title.toLowerCase().startsWith('chapter'))) {
+      deduplicated.set(ch.chapterNumber, ch);
+    }
+  }
+
+  const result = Array.from(deduplicated.values());
+
+  // Sort ascending by chapterNumber (e.g. Ch 1, Ch 1.5, Ch 2...)
+  result.sort((a, b) => {
     if (a.chapterNumber !== b.chapterNumber) {
       return a.chapterNumber - b.chapterNumber;
     }
     return a.id.localeCompare(b.id);
   });
 
-  return chapters;
+  return result;
 }
 
 export async function getMangaChapters(

@@ -54,12 +54,12 @@ export function ensureAbsoluteUrl(url: string, baseUrl: string): string {
 }
 
 /**
- * Extract clean manga slug or ID from URL
+ * Extract clean manga slug or ID from URL (supports both /comics/ and /series/)
  */
 export function extractMangaId(url: string): string {
   if (!url) return '';
   const clean = url.replace(/https?:\/\/[^/]+/i, '');
-  const match = clean.match(/\/series\/([^/?#]+)/i);
+  const match = clean.match(/\/(?:comics|series)\/([^/?#]+)/i);
   if (match && match[1]) {
     return match[1];
   }
@@ -73,7 +73,7 @@ export function extractMangaId(url: string): string {
 export function extractChapterId(url: string): string {
   if (!url) return '';
   const clean = url.replace(/https?:\/\/[^/]+/i, '');
-  const match = clean.match(/\/series\/([^/]+)\/chapter\/([^/?#]+)/i);
+  const match = clean.match(/\/(?:comics|series)\/([^/]+)\/chapter\/([^/?#]+)/i);
   if (match && match[1] && match[2]) {
     return `${match[1]}--chapter--${match[2]}`;
   }
@@ -89,11 +89,11 @@ export function reconstructChapterUrl(chapterId: string, baseUrl: string): strin
   }
   if (chapterId.includes('--chapter--')) {
     const [series, chapter] = chapterId.split('--chapter--');
-    return `${baseUrl}/series/${series}/chapter/${chapter}`;
+    return `${baseUrl}/comics/${series}/chapter/${chapter}`;
   }
   if (chapterId.includes('--')) {
     const path = chapterId.split('--').join('/');
     return `${baseUrl}/${path}`;
   }
-  return `${baseUrl}/${chapterId}`;
+  return `${baseUrl}/comics/${chapterId}`;
 }
