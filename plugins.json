@@ -11,10 +11,10 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "High-quality manga & manhwa provider for Asura Scans (asurascans.com) with ad filtering and sequential chapter indexing.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
-      "repository": "https://github.com/username/seanime-asura-provider",
-      "manifestURI": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/manifest.json",
-      "payloadURI": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/dist/index.js",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
+      "repository": "https://github.com/AndromedaBytes/Anime",
+      "manifestURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/manifest.json",
+      "payloadURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/dist/index.js",
       "entrypoint": "dist/index.js",
       "language": "typescript",
       "domain": "asurascans.com",
@@ -31,7 +31,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "Official MangaDex API provider with multi-language and multi-scanlator support.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/5rahim/seanime-extensions",
       "domain": "mangadex.org",
       "status": "Active",
@@ -47,7 +47,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "Manga and manhwa reader with high quality releases and extensive catalog.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "comick.io",
       "status": "Active"
@@ -59,7 +59,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "High quality scans and translations for popular action and fantasy manhwa.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "flamecomics.xyz",
       "status": "Active"
@@ -71,7 +71,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "Fast manga reading source with extensive volume and chapter archives.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "mangafire.to",
       "status": "Active"
@@ -83,7 +83,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "Multi-version manga aggregator with community chapter uploads.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "mangapark.net",
       "status": "Active"
@@ -95,7 +95,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "Fast updates for ongoing manga and manhwa releases.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "mangabuddy.com",
       "status": "Active"
@@ -107,7 +107,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "High-resolution official and scanlation rips with fast page delivery.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "mangasee123.com",
       "status": "Active"
@@ -119,7 +119,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "Clean manga and manhwa archive mirror with high quality pages.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "mangalife.us",
       "status": "Active"
@@ -131,7 +131,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "Action, martial arts, and fantasy comic translations.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "reaperscans.com",
       "status": "Active"
@@ -143,7 +143,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "Fast release manhwa translations and community updates.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "drakescans.com",
       "status": "Active"
@@ -155,7 +155,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "High-quality scanlation releases for popular serialized series.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "zeroscans.com",
       "status": "Active"
@@ -167,7 +167,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "Dedicated cultivation and martial arts manhua provider.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "manhuaplus.org",
       "status": "Active"
@@ -179,7 +179,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "General manga and webtoon reading source.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "mangaread.org",
       "status": "Active"
@@ -191,7 +191,7 @@
       "type": "manga-provider",
       "author": "Community",
       "description": "Community-driven manga repository with multi-language groups and forums.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "bato.to",
       "status": "Active"
@@ -203,7 +203,7 @@
       "type": "onlinestream-provider",
       "author": "Community",
       "description": "Online anime streaming provider with subbed and dubbed video sources.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/5rahim/seanime-extensions",
       "domain": "gogoanime3.co",
       "status": "Active"
@@ -215,7 +215,7 @@
       "type": "onlinestream-provider",
       "author": "Community",
       "description": "High definition anime streaming with episode schedules and multi-server streams.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "aniwatchtv.to",
       "status": "Active"
@@ -227,7 +227,7 @@
       "type": "onlinestream-provider",
       "author": "Community",
       "description": "Italian & multi-language anime streaming provider.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "animesaturn.cx",
       "status": "Active"
@@ -239,7 +239,7 @@
       "type": "onlinestream-provider",
       "author": "Community",
       "description": "Fast video server streaming source for newly airing anime episodes.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "kaas.to",
       "status": "Active"
@@ -251,7 +251,7 @@
       "type": "onlinestream-provider",
       "author": "Community",
       "description": "Lightweight, highly optimized video streams for low bandwidth playback.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "animepahe.ru",
       "status": "Active"
@@ -263,7 +263,7 @@
       "type": "onlinestream-provider",
       "author": "Community",
       "description": "Direct online anime streaming mirror with HD video options.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "animekai.to",
       "status": "Active"
@@ -275,7 +275,7 @@
       "type": "onlinestream-provider",
       "author": "Community",
       "description": "Clean stream player provider with customizable quality options.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "yugenanime.tv",
       "status": "Active"
@@ -287,7 +287,7 @@
       "type": "anime-torrent-provider",
       "author": "Community",
       "description": "The primary anime torrent tracker and RSS feed provider for Seanime torrent streaming.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/5rahim/seanime-extensions",
       "domain": "nyaa.si",
       "status": "Active"
@@ -299,7 +299,7 @@
       "type": "anime-torrent-provider",
       "author": "Community",
       "description": "A comprehensive media index for Japanese animation releases and direct torrent links.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/5rahim/seanime-extensions",
       "domain": "tokyotosho.info",
       "status": "Active"
@@ -311,7 +311,7 @@
       "type": "anime-torrent-provider",
       "author": "Community",
       "description": "Automated mirror and direct DDL/torrent JSON feed provider.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/5rahim/seanime-extensions",
       "domain": "animetosho.org",
       "status": "Active"
@@ -323,7 +323,7 @@
       "type": "anime-torrent-provider",
       "author": "Community",
       "description": "Simulcast direct torrent release schedule and RSS torrent provider.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/5rahim/seanime-extensions",
       "domain": "subsplease.org",
       "status": "Active"
@@ -335,7 +335,7 @@
       "type": "anime-torrent-provider",
       "author": "Community",
       "description": "Multi-subtitle anime simulcast torrent tracker.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "erai-raws.info",
       "status": "Active"
@@ -347,7 +347,7 @@
       "type": "anime-torrent-provider",
       "author": "Community",
       "description": "Open anime and manga torrent indexer.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "anidex.info",
       "status": "Active"
@@ -359,7 +359,7 @@
       "type": "anime-torrent-provider",
       "author": "Community",
       "description": "Backup release indexer and torrent tracker.",
-      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.svg",
+      "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
       "repository": "https://github.com/Seanime-contributions/Seanime-Providers",
       "domain": "sharedb.net",
       "status": "Active"

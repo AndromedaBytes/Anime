@@ -5,11 +5,11 @@
   "type": "manga-provider",
   "author": "Community",
   "description": "High-quality manga and manhwa provider for Asura Scans (asuracomic.net).",
-  "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.png",
-  "manifestURI": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/manifest.json",
-  "payloadURI": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/dist/index.js",
+  "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
+  "manifestURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/manifest.json",
+  "payloadURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/dist/index.js",
   "language": "typescript",
-  "repository": "https://github.com/username/seanime-asura-provider",
+  "repository": "https://github.com/AndromedaBytes/Anime",
   "settings": {
     "supportsMultiLanguage": false,
     "supportsMultiScanlator": false
