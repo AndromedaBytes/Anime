@@ -82,4 +82,8 @@ export class Provider implements SeanimeMangaProvider {
   }
 }
 
+if (typeof globalThis !== 'undefined') {
+  (globalThis as any).Provider = Provider;
+}
+
 export default Provider;
