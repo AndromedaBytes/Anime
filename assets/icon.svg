@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="asuraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151B26" />
+      <stop offset="100%" stop-color="#0B0E14" />
+    </linearGradient>
+  </defs>
+  <!-- Rounded Base -->
+  <rect width="128" height="128" rx="28" fill="url(#bgGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  
+  <!-- Asura Stylized "A" Glyph / Flame Symbol -->
+  <path d="M64 22L98 94H80L64 58L48 94H30L64 22Z" fill="url(#asuraGrad)" />
+  <path d="M64 42L76 72H52L64 42Z" fill="#0B0E14" />
+  
+  <!-- Sword / Flame accent -->
+  <path d="M64 52L68 84L64 96L60 84Z" fill="#60A5FA" />
+  <circle cx="64" cy="98" r="4" fill="#38BDF8" />
+</svg>

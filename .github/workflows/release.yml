@@ -1,0 +1,177 @@
+name: CI/CD Release Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Semantic version bump type (patch, minor, major) or specific version (e.g. 1.0.1)'
+        required: false
+        default: 'patch'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # =========================================================================
+  # 1. QUALITY ASSURANCE (Typecheck, Test & Schema Validation)
+  # =========================================================================
+  verify:
+    name: Verify & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Validate Manifest Schemas & URLs
+        run: npx tsx scripts/validate-manifests.ts
+
+      - name: Run TypeScript Strict Type Check
+        run: npm run typecheck
+
+      - name: Run Vitest Unit & Integration Suite
+        run: npm test
+
+  # =========================================================================
+  # 2. BUILD & BUNDLE
+  # =========================================================================
+  build:
+    name: Build & Package Bundle
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Standalone Bundle
+        run: npm run build
+
+      - name: Verify Bundle Size & Integrity
+        run: |
+          if [ ! -f "dist/index.js" ]; then
+            echo "::error::Build failed: dist/index.js not found!"
+            exit 1
+          fi
+          BUNDLE_SIZE=$(du -h dist/index.js | cut -f1)
+          echo "✅ Standalone bundle generated: dist/index.js (${BUNDLE_SIZE})"
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: distribution-bundle
+          path: |
+            dist/
+            manifest.json
+            plugins.json
+          retention-days: 7
+
+  # =========================================================================
+  # 3. AUTO-COMMIT DIST ON MAIN (For raw GitHub URL consumers)
+  # =========================================================================
+  update-branch:
+    name: Sync Bundle to Main Branch
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Production Bundle
+        run: npm run build
+
+      - name: Commit and Push Updated Bundle
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/ manifest.json plugins.json
+          if git diff --staged --quiet; then
+            echo "No changes in distribution assets to commit."
+          else
+            git commit -m "chore(release): update compiled distribution bundle [skip ci]"
+            git push origin main
+          fi
+
+  # =========================================================================
+  # 4. PUBLISH GITHUB RELEASE (On Tag Push)
+  # =========================================================================
+  publish-release:
+    name: Publish GitHub Release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Synchronize Manifest Versions with Tag
+        run: |
+          TAG_VERSION=${GITHUB_REF#refs/tags/}
+          echo "Synchronizing version to: ${TAG_VERSION}"
+          npx tsx scripts/sync-version.ts "${TAG_VERSION}"
+
+      - name: Build Production Bundle
+        run: npm run build
+
+      - name: Create GitHub Release & Upload Assets
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          files: |
+            dist/index.js
+            dist/index.mjs
+            dist/index.global.js
+            manifest.json
+            plugins.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,36 @@
+{
+  "name": "seanime-asura-provider",
+  "version": "1.0.0",
+  "description": "Seanime Asura Scans Manga Provider & Custom Marketplace Repository",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:live": "tsx scripts/live-test.ts",
+    "validate": "tsx scripts/validate-manifests.ts",
+    "version:sync": "tsx scripts/sync-version.ts"
+  },
+  "keywords": [
+    "seanime",
+    "seanime-extension",
+    "manga-provider",
+    "asura-scans",
+    "scraper"
+  ],
+  "author": "Community",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1"
+  }
+}

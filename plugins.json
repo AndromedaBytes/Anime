@@ -1,0 +1,25 @@
+{
+  "name": "Seanime Community Extensions Marketplace",
+  "description": "Custom extensions repository for Seanime containing community providers and plugins.",
+  "manifestVersion": "1.0.0",
+  "plugins": [
+    {
+      "id": "asura-scans",
+      "name": "Asura Scans",
+      "version": "1.0.0",
+      "type": "manga-provider",
+      "author": "Community",
+      "description": "High-quality manga and manhwa provider for Asura Scans (asuracomic.net).",
+      "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.png",
+      "repository": "https://github.com/username/seanime-asura-provider",
+      "manifestURI": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/manifest.json",
+      "payloadURI": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/dist/index.js",
+      "entrypoint": "dist/index.js",
+      "language": "typescript",
+      "settings": {
+        "supportsMultiLanguage": false,
+        "supportsMultiScanlator": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "asura-scans",
+  "name": "Asura Scans",
+  "version": "1.0.0",
+  "type": "manga-provider",
+  "author": "Community",
+  "description": "High-quality manga and manhwa provider for Asura Scans (asuracomic.net).",
+  "icon": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/assets/icon.png",
+  "manifestURI": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/manifest.json",
+  "payloadURI": "https://raw.githubusercontent.com/username/seanime-asura-provider/main/dist/index.js",
+  "language": "typescript",
+  "repository": "https://github.com/username/seanime-asura-provider",
+  "settings": {
+    "supportsMultiLanguage": false,
+    "supportsMultiScanlator": false
+  }
+}
