@@ -2,17 +2,13 @@
   "id": "asura-scans",
   "name": "Asura Scans",
   "version": "1.0.0",
-  "type": "manga-provider",
-  "author": "Community",
-  "description": "High-quality manga & manhwa provider for Asura Scans (asurascans.com) with ad filtering and sequential chapter indexing.",
-  "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
   "manifestURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/manifest.json",
-  "payloadURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/dist/index.js",
   "language": "javascript",
+  "type": "manga-provider",
+  "description": "High-quality manga & manhwa provider for Asura Scans (asurascans.com) with ad filtering and sequential chapter indexing.",
+  "author": "Community",
+  "icon": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/assets/icon.svg",
+  "website": "https://github.com/AndromedaBytes/Anime",
   "lang": "en",
-  "repository": "https://github.com/AndromedaBytes/Anime",
-  "settings": {
-    "supportsMultiLanguage": false,
-    "supportsMultiScanlator": false
-  }
+  "payloadURI": "https://raw.githubusercontent.com/AndromedaBytes/Anime/main/dist/index.js"
 }

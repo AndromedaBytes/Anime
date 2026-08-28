@@ -31,6 +31,6 @@ describe('Manifest Schema Validation', () => {
     expect(manifest.version).toBe('1.0.0');
     expect(manifest.manifestURI).toBeDefined();
     expect(manifest.payloadURI).toBeDefined();
-    expect(manifest.settings).toBeDefined();
+    expect(manifest.website).toBeDefined();
   });
 });
